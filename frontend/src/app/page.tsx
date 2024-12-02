@@ -8,18 +8,16 @@ export default function Home() {
     <>
       <Header />
 
-      <main className="flex flex-row w-screen h-screen">
+      <main className="flex flex-row w-screen h-screen overflow-hidden">
+        {/* Existing Tickets Section */}
         <ExistingTickets />
-
-        {/* left section  */}
-
-        <section className="flex flex-row mt-[50px] w-[45%]">
-          <div className="flex flex-col w-[400px] h-[500px] bg-[#EFEFF0] ml-[30px] shadow-lg mr-[20px] items-center font-mono rounded-lg">
+        {/* Left Section */}
+        <section className="flex flex-col mt-[50px] w-[45%]">
+          <div className="flex flex-col w-full max-w-[400px] h-[500px] bg-[#EFEFF0] ml-[30px] shadow-lg mr-[20px] items-center font-mono rounded-lg">
             <p className="mt-[30px]">Select an existing ticket to log time</p>
             <p>or</p>
             <span className="text-lg text-blue-500">
               <Link href={"/newticket"} className="underline">
-                {" "}
                 Create a new One
               </Link>
             </span>

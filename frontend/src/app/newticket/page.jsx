@@ -48,7 +48,7 @@ export default function NewTicket() {
       <main className="flex flex-row w-screen h-screen">
         <ExistingTickets />
 
-        <section className="flex flex-row mt-[50px] w-[45%]">
+        <section className="flex flex-row mt-[70px] w-[45%]">
           <div className="flex flex-col w-[400px] border h-[550px] bg-[#FFFFFF] ml-[30px] shadow-lg mr-[20px] items-center font-mono rounded-lg">
             <h2 className="mt-[30px] font-mono text-black font-medium text-lg">
               Create New Ticket
@@ -60,7 +60,6 @@ export default function NewTicket() {
             >
               <select
                 className="w-[80%] h-[40px] bg-[#D9D9D9] px-3 text-sm rounded-md outline-none text-gray-700"
-                defaultValue=""
                 value={tickettype}
                 onChange={(e) => setType(e.target.value)}
               >

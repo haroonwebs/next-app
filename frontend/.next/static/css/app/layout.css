@@ -561,6 +561,9 @@ video {
     max-width: 1536px;
   }
 }
+.fixed {
+  position: fixed;
+}
 .mb-4 {
   margin-bottom: 1rem;
 }
@@ -594,6 +597,15 @@ video {
 .mt-\[50px\] {
   margin-top: 50px;
 }
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.ml-\[20px\] {
+  margin-left: 20px;
+}
+.mt-\[70px\] {
+  margin-top: 70px;
+}
 .flex {
   display: flex;
 }
@@ -624,8 +636,14 @@ video {
 .h-screen {
   height: 100vh;
 }
+.h-\[400px\] {
+  height: 400px;
+}
 .max-h-\[80px\] {
   max-height: 80px;
+}
+.max-h-\[300px\] {
+  max-height: 300px;
 }
 .min-h-\[80px\] {
   min-height: 80px;
@@ -666,6 +684,18 @@ video {
 .w-screen {
   width: 100vw;
 }
+.w-\[200px\] {
+  width: 200px;
+}
+.w-\[30\%\] {
+  width: 30%;
+}
+.w-\[70\%\] {
+  width: 70%;
+}
+.max-w-\[400px\] {
+  max-width: 400px;
+}
 .appearance-none {
   appearance: none;
 }
@@ -699,6 +729,23 @@ video {
 .overflow-hidden {
   overflow: hidden;
 }
+.overflow-visible {
+  overflow: visible;
+}
+.overflow-y-auto {
+  overflow-y: auto;
+}
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.whitespace-nowrap {
+  white-space: nowrap;
+}
+.text-nowrap {
+  text-wrap: nowrap;
+}
 .rounded {
   border-radius: 0.25rem;
 }
@@ -710,6 +757,9 @@ video {
 }
 .rounded-sm {
   border-radius: 0.125rem;
+}
+.rounded-full {
+  border-radius: 9999px;
 }
 .rounded-t-lg {
   border-top-left-radius: 0.5rem;
@@ -783,11 +833,28 @@ video {
   padding-left: 0.75rem;
   padding-right: 0.75rem;
 }
+.px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
 .pt-2 {
   padding-top: 0.5rem;
 }
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+.text-left {
+  text-align: left;
+}
 .text-center {
   text-align: center;
+}
+.text-justify {
+  text-align: justify;
 }
 .font-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -847,6 +914,10 @@ video {
   --tw-text-opacity: 1;
   color: rgb(148 163 184 / var(--tw-text-opacity, 1));
 }
+.text-slate-600 {
+  --tw-text-opacity: 1;
+  color: rgb(71 85 105 / var(--tw-text-opacity, 1));
+}
 .underline {
   text-decoration-line: underline;
 }
@@ -893,6 +964,10 @@ body {
 
 .marker\:h-\[40px\]::marker {
   height: 40px;
+}
+
+.hover\:underline:hover {
+  text-decoration-line: underline;
 }
 
 /*!************************************************************************************************************************************************************************************************************************************************************************************************!*\
