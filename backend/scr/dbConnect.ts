@@ -10,6 +10,6 @@ export const AppDataSource = new DataSource({
   password: "704463",
   database: "first_orm_project",
   synchronize: true,
-  logging: true,
+  logging: false,
   entities: [Ticket],
 });

@@ -1,6 +1,6 @@
 // import Image from "next/image";
 import { Header } from "../components/Header";
-import { ExistingTickets } from "../components/ExistingTickets";
+import { ExistingTickets } from "@/components/ExistingTickets";
 import Link from "next/link";
 
 export default function Home() {

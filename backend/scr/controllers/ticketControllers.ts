@@ -13,10 +13,10 @@ export const createTicket = async (
       ticketdetails: string;
       hours: number;
     };
-
+    console.log(ticketdetails, ticketsummary, tickettype, hours);
     // Validate the request body
     if (!tickettype || !ticketsummary || !ticketdetails || !hours) {
-      res.status(400).json({
+      res.status(403).json({
         success: false,
         message: "Please fill complete form with valid data",
       });
