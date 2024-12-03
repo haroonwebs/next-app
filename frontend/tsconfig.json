@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/components/ExistingTickets.jsx",
-    "src/app/newticket/page.jsx"
+    "src/app/newticket/page.jsx",
+    "src/components/Timer.jsx"
   ],
   "exclude": ["node_modules"]
 }

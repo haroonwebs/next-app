@@ -68,7 +68,6 @@ export const getAllTickets = async (
   res: Response
 ): Promise<void> => {
   try {
-    //access Ticket from database using getRepository
     const ticketRepository = AppDataSource.getRepository(Ticket);
 
     if (!ticketRepository) {
@@ -79,8 +78,11 @@ export const getAllTickets = async (
       return;
     }
 
-    //get all tickets method
-    const allTickets = await ticketRepository.find();
+    const allTickets = await ticketRepository.find({
+      order: {
+        id: "ASC",
+      },
+    });
     if (!allTickets || allTickets.length === 0) {
       res.status(404).json({
         success: false,

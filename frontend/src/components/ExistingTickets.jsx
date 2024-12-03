@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { Design } from "@/components/Design";
 
 export const ExistingTickets = () => {
   const [tickets, setTickets] = useState([]);
@@ -24,21 +23,23 @@ export const ExistingTickets = () => {
   }, []);
 
   return (
-    <section className="w-[55%] overflow-hidden">
+    <section className="w-[55%] overflow-hidden ml-9">
       <p className="ml-[20px] text-xl font-mono mt-[50px] font-medium">
         Existing Tickets
       </p>
-      <div className="flex flex-row mt-[20px] font-mono">
+      <div className="flex flex-row mt-[20px] font-mono rounded-md">
         <div className="w-full bg-[#F8F8F8] overflow-hidden">
-          {/* Set fixed height and enable scrolling */}
           <div className="max-h-[300px] overflow-y-auto">
             <table className="w-full">
               <thead>
                 <tr className="border-b-2">
-                  <th className="border-r-2 px-4 py-2 text-left w-[70%]">
-                    Tickets
+                  <th className="border-r-2 px-4 py-2 font-normal text-left w-[70%]">
+                    <i>Tickets</i>
                   </th>
-                  <th className="px-4 py-2 text-left w-[30%]">Time Log</th>
+                  <th className="px-4 py-2 text-left font-medium w-[30%]">
+                    {" "}
+                    <i>Time Log</i>
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -46,19 +47,31 @@ export const ExistingTickets = () => {
                   tickets.map((ticket) => (
                     <tr key={ticket.id} className="border-b-2">
                       <td className="border-r-2 px-4 py-2 flex items-center overflow-visible">
-                        <Design />
+                        <div className="h-full w-[100px] flex items-center">
+                          <div className="flex items-center justify-center w-[30px] h-full bg-green-600">
+                            <div className="w-[15px] h-[15px] bg-white flex items-center justify-center text-black rounded-full"></div>
+                          </div>
+
+                          <div className="text-sm text-black font-bold ml-2">
+                            Tech-<span>{ticket.id}</span>
+                          </div>
+                        </div>
+                        {/* <span className="font-bold">{ticket.id}</span> */}
                         <span className="ml-2">{ticket.ticketdetails}</span>
                       </td>
                       <td className="px-4 py-2 whitespace-nowrap overflow-visible">
                         {ticket.hours > 0 ? (
-                          <span>{ticket.hours}</span>
+                          <span>{ticket.hours}h</span>
                         ) : (
-                          <Link
-                            href="/edit-ticket"
-                            className="text-slate-600 underline"
-                          >
-                            log ticket
-                          </Link>
+                          <>
+                            <span className="mr-2">No time log.</span>
+                            <Link
+                              href="/edit-ticket"
+                              className="text-slate-600 underline"
+                            >
+                              Log time
+                            </Link>
+                          </>
                         )}
                       </td>
                     </tr>

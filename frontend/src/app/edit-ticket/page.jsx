@@ -1,7 +1,8 @@
 import { Header } from "@/components/Header";
 import { ExistingTickets } from "@/components/ExistingTickets";
-import Timer from "@/components/Timer";
+// import Timer from "@/components/Timer";
 import { Design } from "@/components/Design";
+import Link from "next/link";
 
 export default function EditTicket() {
   return (
@@ -11,31 +12,28 @@ export default function EditTicket() {
       <main className="flex flex-row w-screen h-screen">
         <ExistingTickets />
 
-        {/* left section  */}
-
-        <section className="flex flex-row mt-[50px] w-[45%]">
-          <div className="flex flex-col w-[400px] border h-[550px] bg-[#FFFFFF] ml-[30px] shadow-lg mr-[20px] items-start font-mono rounded-lg">
+        <section className="flex flex-row mt-[50px] w-[45%] border-[#7D7D82]">
+          <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[550px] bg-[#FFFFFF] ml-[30px] shadow-lg mr-[20px] items-start font-mono rounded-lg">
             <div className="flex flex-row w-full border h-[40px] bg-[#FFFFFF] items-center font-mono rounded-t-lg">
               <Design />
               <div className="h-full w-full overflow-hidden pt-2">haroon</div>
             </div>
-            {/* Header */}
-            <h3 className="mt-[30px] font-mono text-black font-[500px] text-lg ml-[40px] ">
+
+            <h3 className="mt-[30px] font-mono text-black font-[300px] text-md ml-[40px] ">
               Log time manually
             </h3>
 
-            {/* Form */}
-            <form className="flex flex-col w-full items-center mt-[10px]">
+            <form className="flex flex-col w-full items-center ">
               <input
                 type="number"
                 name=""
                 min="0.00"
                 id=""
-                placeholder="hours"
-                className="w-[80%] h-[40px] bg-[#D9D9D9] mt-[20px] px-3 text-sm rounded-md outline-none"
+                placeholder="0.00"
+                className="w-[80%] h-[40px] border border-[#B4B4B8] bg-[#FFFFFF] text-black mt-[20px] px-2 font-[300px] text-md rounded-md outline-none"
               />
 
-              <div className="flex w-full mt-[30px] marker:h-[40px] bg-[#FFFFFF] items-center justify-around font-mono text-sm ">
+              <div className="flex w-full mt-[20px] marker:h-[40px] bg-[#FFFFFF] items-center justify-around font-mono text-sm ">
                 <span>Track with Timer</span>
                 <span className="underline text-blue-600">
                   Use count down timer
@@ -47,26 +45,70 @@ export default function EditTicket() {
                 id=""
                 className="flex flex-row justify-center items-center w-[80%] min-h-[80px] max-h-[80px] mt-[20px] px-3 text-sm rounded-md outline-none"
               >
-                <Timer />
+                <div className="flex flex-row justify-center items-center w-[80%] min-h-[80px] max-h-[80px] mt-[20px] px-3 text-sm ">
+                  <div className="flex w-[50px] h-[60px] items-center justify-center">
+                    <select
+                      // value={firstValue}
+                      // onChange={handleChange(setFirstValue)}
+                      className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
+                    >
+                      {Array.from({ length: 12 }, (_, i) => (
+                        <option key={i + 1} value={i + 1}>
+                          {i + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <span className="text-lg text-slate-400">:</span>
+                  <div className="flex w-[50px] h-[60px] items-center justify-center">
+                    <select
+                      // value={secondValue}
+                      // onChange={handleChange(setSecondValue)}
+                      className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
+                    >
+                      {Array.from({ length: 60 }, (_, i) => (
+                        <option key={i + 1} value={i + 1}>
+                          {i + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <span className="text-lg text-slate-400">:</span>
+                  <div className="flex w-[50px] h-[60px] items-center justify-center">
+                    <select
+                      // value={thirdValue}
+                      // onChange={handleChange(setThirdValue)}
+                      className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
+                    >
+                      {Array.from({ length: 60 }, (_, i) => (
+                        <option key={i + 1} value={i + 1}>
+                          {i + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
               </div>
 
               <div className=" flex flex-row items-center justify-evenly w-[80%] h-[40px] mt-[20px]  text-black text-sm rounded-sm ">
                 <button
                   type="reset"
-                  className="underline text-lg text-gray-400"
+                  className="underline text-lg text-gray-400 hover:text-gray-600"
                 >
                   Reset
                 </button>
                 <button
                   type="submit"
-                  className="text-lg text-gray-400 border text-center  border-green-500 bg-[#1E8826] rounded-sm w-[100px] h-full"
+                  className="text-lg text-white border text-center  border-green-500 hover:bg-green-700 bg-[#1E8826] rounded-sm w-[100px] h-full"
                 >
                   Start
                 </button>
-                <button className="underline text-lg text-gray-400">
+                <button className="underline text-lg text-gray-400 hover:text-gray-600">
                   Stop
                 </button>
               </div>
+
+              <div className="w-[80%] bg-gray-200 h-[2px] text-sm rounded-sm border mt-5"></div>
 
               <textarea
                 name=""
@@ -76,10 +118,13 @@ export default function EditTicket() {
               ></textarea>
 
               <div className=" flex flex-row items-center justify-around w-[80%] h-[40px] mt-[20px]  text-black text-sm rounded-sm ">
-                <button className="text-lg border text-center text-blue-500 border-blue-500 rounded-sm w-[130px] h-full">
-                  Cancel{" "}
-                </button>
-                <button className="text-lg text-gray-400 border text-center bg-blue-500 rounded-sm w-[130px] h-full">
+                <Link href="/">
+                  <button className="text-lg border p-1 text-center hover:text-blue-700 hover:bg-blue-300 text-blue-500 border-blue-500 rounded-sm w-[130px] h-full">
+                    Cancel{" "}
+                  </button>
+                </Link>
+
+                <button className="text-lg text-black border text-center bg-blue-500 hover:bg-blue-300 hover:text-white rounded-sm w-[130px] h-full">
                   {" "}
                   Save{" "}
                 </button>
