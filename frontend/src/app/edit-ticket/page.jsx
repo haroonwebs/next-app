@@ -1,10 +1,53 @@
+"use client";
 import { Header } from "@/components/Header";
 import { ExistingTickets } from "@/components/ExistingTickets";
-// import Timer from "@/components/Timer";
-import { Design } from "@/components/Design";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function EditTicket() {
+  const searchParams = useSearchParams();
+  const [hours, setHours] = useState("");
+  const [ticketdetails, setDetails] = useState("");
+
+  useEffect(() => {
+    const logDetails = searchParams.get("details") || "";
+    const logHours = searchParams.get("hours") || "";
+
+    setHours(logHours);
+    setDetails(logDetails);
+  }, [searchParams]);
+
+  const id = searchParams.get("id");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const res = await axios.put(
+        `http://localhost:4000/api/v1/tickets/${id}`,
+        {
+          hours,
+          ticketdetails,
+        }
+      );
+      toast.success(res.data.message);
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        toast.error(error.response.data.message);
+      } else {
+        toast.error("An error occurred.");
+      }
+    }
+  };
+
   return (
     <>
       <Header />
@@ -15,18 +58,33 @@ export default function EditTicket() {
         <section className="flex flex-row mt-[50px] w-[45%] border-[#7D7D82]">
           <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[550px] bg-[#FFFFFF] ml-[30px] shadow-lg mr-[20px] items-start font-mono rounded-lg">
             <div className="flex flex-row w-full border h-[40px] bg-[#FFFFFF] items-center font-mono rounded-t-lg">
-              <Design />
-              <div className="h-full w-full overflow-hidden pt-2">haroon</div>
+              <div className="h-full w-[150px] flex items-center">
+                <div className="flex items-center justify-center w-[30px] h-full bg-green-600">
+                  <div className="w-[15px] h-[15px] bg-white flex items-center justify-center text-black rounded-full"></div>
+                </div>
+
+                <div className="text-sm text-black font-bold ml-2">
+                  Tech-<span>{id}</span>
+                </div>
+              </div>
+              <div className="h-full w-full overflow-hidden pt-2">
+                {ticketdetails}
+              </div>
             </div>
 
             <h3 className="mt-[30px] font-mono text-black font-[300px] text-md ml-[40px] ">
               Log time manually
             </h3>
 
-            <form className="flex flex-col w-full items-center ">
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col w-full items-center "
+            >
               <input
                 type="number"
                 name=""
+                value={hours}
+                onChange={(e) => setHours(e.target.value)}
                 min="0.00"
                 id=""
                 placeholder="0.00"
@@ -47,11 +105,7 @@ export default function EditTicket() {
               >
                 <div className="flex flex-row justify-center items-center w-[80%] min-h-[80px] max-h-[80px] mt-[20px] px-3 text-sm ">
                   <div className="flex w-[50px] h-[60px] items-center justify-center">
-                    <select
-                      // value={firstValue}
-                      // onChange={handleChange(setFirstValue)}
-                      className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
-                    >
+                    <select className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm">
                       {Array.from({ length: 12 }, (_, i) => (
                         <option key={i + 1} value={i + 1}>
                           {i + 1}
@@ -61,11 +115,7 @@ export default function EditTicket() {
                   </div>
                   <span className="text-lg text-slate-400">:</span>
                   <div className="flex w-[50px] h-[60px] items-center justify-center">
-                    <select
-                      // value={secondValue}
-                      // onChange={handleChange(setSecondValue)}
-                      className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
-                    >
+                    <select className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm">
                       {Array.from({ length: 60 }, (_, i) => (
                         <option key={i + 1} value={i + 1}>
                           {i + 1}
@@ -75,11 +125,7 @@ export default function EditTicket() {
                   </div>
                   <span className="text-lg text-slate-400">:</span>
                   <div className="flex w-[50px] h-[60px] items-center justify-center">
-                    <select
-                      // value={thirdValue}
-                      // onChange={handleChange(setThirdValue)}
-                      className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
-                    >
+                    <select className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm">
                       {Array.from({ length: 60 }, (_, i) => (
                         <option key={i + 1} value={i + 1}>
                           {i + 1}
@@ -113,6 +159,8 @@ export default function EditTicket() {
               <textarea
                 name=""
                 id=""
+                onChange={(e) => setDetails(e.target.value)}
+                value={ticketdetails}
                 placeholder="Notes"
                 className="w-[80%] min-h-[80px] max-h-[80px] mt-[20px] bg-white text-black text-sm rounded-sm border outline-none"
               ></textarea>
@@ -124,7 +172,10 @@ export default function EditTicket() {
                   </button>
                 </Link>
 
-                <button className="text-lg text-black border text-center bg-blue-500 hover:bg-blue-300 hover:text-white rounded-sm w-[130px] h-full">
+                <button
+                  type="submit"
+                  className="text-lg text-black border text-center bg-blue-500 hover:bg-blue-300 hover:text-white rounded-sm w-[130px] h-full"
+                >
                   {" "}
                   Save{" "}
                 </button>

@@ -1,6 +1,8 @@
-import { Request, Response } from "express";
+import { application, Request, Response } from "express";
 import { Ticket } from "../Models /ticketModel"; // Ensure the path is correct
 import { AppDataSource } from "../dbConnect";
+
+// create new ticket api
 
 export const createTicket = async (
   req: Request,
@@ -14,7 +16,7 @@ export const createTicket = async (
       hours: number;
     };
     console.log(ticketdetails, ticketsummary, tickettype, hours);
-    // Validate the request body
+
     if (!tickettype || !ticketsummary || !ticketdetails || !hours) {
       res.status(403).json({
         success: false,
@@ -23,10 +25,8 @@ export const createTicket = async (
       return;
     }
 
-    // Access the repository
     const ticketRepository = AppDataSource.getRepository(Ticket);
 
-    // Create a new ticket instance
     const newTicket = ticketRepository.create({
       tickettype,
       ticketsummary,
@@ -34,7 +34,6 @@ export const createTicket = async (
       hours,
     });
 
-    // save ticket to database
     const savedTicket = await ticketRepository.save(newTicket);
     if (!savedTicket) {
       res.status(400).json({
@@ -61,8 +60,7 @@ export const createTicket = async (
   }
 };
 
-// api for get all tickets
-
+// get all tickets api
 export const getAllTickets = async (
   req: Request,
   res: Response
@@ -130,12 +128,21 @@ export const editTicket = async (
       });
       return;
     }
+
     const { tickettype, ticketsummary, ticketdetails, hours } = req.body as {
       tickettype: string;
       ticketsummary: string;
       ticketdetails: string;
       hours: number;
     };
+
+    if (!hours || !ticketdetails || hours <= 0) {
+      res.status(403).json({
+        success: false,
+        message: "Ticket Details and Time is Required",
+      });
+      return;
+    }
 
     const updateTicket = Object.assign(ticketExist, {
       tickettype,

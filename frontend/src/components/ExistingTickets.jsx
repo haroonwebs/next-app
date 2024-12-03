@@ -66,7 +66,14 @@ export const ExistingTickets = () => {
                           <>
                             <span className="mr-2">No time log.</span>
                             <Link
-                              href="/edit-ticket"
+                              href={{
+                                pathname: "/edit-ticket",
+                                query: {
+                                  id: ticket.id,
+                                  details: ticket.ticketdetails,
+                                  hours: ticket.hours,
+                                },
+                              }}
                               className="text-slate-600 underline"
                             >
                               Log time
