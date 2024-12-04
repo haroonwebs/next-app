@@ -136,13 +136,13 @@ export const editTicket = async (
       hours: number;
     };
 
-    if (!hours || !ticketdetails || hours <= 0) {
-      res.status(403).json({
-        success: false,
-        message: "Ticket Details and Time is Required",
-      });
-      return;
-    }
+    // if (!hours || !ticketdetails) {
+    //   res.status(403).json({
+    //     success: false,
+    //     message: "Ticket Details and Time is Required",
+    //   });
+    //   return;
+    // }
 
     const updateTicket = Object.assign(ticketExist, {
       tickettype,

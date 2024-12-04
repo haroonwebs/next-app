@@ -52,48 +52,54 @@ export default function EditTicket() {
     <>
       <Header />
 
-      <main className="flex flex-row w-screen h-screen">
-        <ExistingTickets />
-
-        <section className="flex flex-row mt-[50px] w-[45%] border-[#7D7D82]">
-          <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[550px] bg-[#FFFFFF] ml-[30px] shadow-lg mr-[20px] items-start font-mono rounded-lg">
-            <div className="flex flex-row w-full border h-[40px] bg-[#FFFFFF] items-center font-mono rounded-t-lg">
+      <main className="flex flex-col sm:flex-row w-screen h-full overflow-hidden">
+        <ExistingTickets />{" "}
+        <section className="flex flex-row sm:mt-[50px] mt-8 sm:w-[45%] w-full border-[#7D7D82]">
+          <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[580px] bg-[#FFFFFF] sm:ml-[30px] ml-5 mb-5 shadow-lg mr-[20px] items-start font-mono rounded-lg">
+            <div className="flex flex-row w-full border min-h-[40px] bg-[#FFFFFF] items-center font-mono rounded-t-lg">
               <div className="h-full w-[150px] flex items-center">
-                <div className="flex items-center justify-center w-[30px] h-full bg-green-600">
-                  <div className="w-[15px] h-[15px] bg-white flex items-center justify-center text-black rounded-full"></div>
-                </div>
-
-                <div className="text-sm text-black font-bold ml-2">
-                  Tech-<span>{id}</span>
-                </div>
+                <img
+                  className="ml-4"
+                  src="/images/Group 3.png"
+                  alt="ticket logo"
+                />
+                <span className="text-sm text-black font-bold ml-2">TECH-</span>
+                <span className="text-sm text-black font-bold">{id}</span>
               </div>
-              <div className="h-full w-full overflow-hidden pt-2">
+              <div className="flex h-full w-full overflow-hidden text-nowrap p-[10px] text-[14px]">
                 {ticketdetails}
               </div>
             </div>
 
-            <h3 className="mt-[30px] font-mono text-black font-[300px] text-md ml-[40px] ">
+            <h3 className="mt-[30px] font-mono text-black font-[400px] text-[18px]  ml-[40px] ">
               Log time manually
             </h3>
 
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col w-full items-center "
+              className="flex flex-col w-full h-full items-center mt-2"
             >
-              <input
-                type="number"
-                name=""
-                value={hours}
-                onChange={(e) => setHours(e.target.value)}
-                min="0.00"
-                id=""
-                placeholder="0.00"
-                className="w-[80%] h-[40px] border border-[#B4B4B8] bg-[#FFFFFF] text-black mt-[20px] px-2 font-[300px] text-md rounded-md outline-none"
-              />
+              <div className="w-[80%] p-1 h-[37px] flex items-center border border-[#B4B4B8] rounded-[4px]">
+                <input
+                  type="number"
+                  name=""
+                  value={hours}
+                  onChange={(e) => setHours(e.target.value)}
+                  min="0.00"
+                  id=""
+                  placeholder="0.00"
+                  className="w-full h-full  bg-[#FFFFFF] text-black px-1 border-r-2 font-[300px] text-md outline-none"
+                />
+                <img
+                  src="/images/image 2.png"
+                  alt=""
+                  className="w-6 h-4 p-[2px]"
+                />
+              </div>
 
-              <div className="flex w-full mt-[20px] marker:h-[40px] bg-[#FFFFFF] items-center justify-around font-mono text-sm ">
+              <div className="flex sm:flex-row flex-col w-[90%] mt-[20px] h-4 sm:items-center sm:justify-between items-center justify-between font-mono text-sm ">
                 <span>Track with Timer</span>
-                <span className="underline text-blue-600">
+                <span className="underline text-[#103BA3]">
                   Use count down timer
                 </span>
               </div>
@@ -156,14 +162,17 @@ export default function EditTicket() {
 
               <div className="w-[80%] bg-gray-200 h-[2px] text-sm rounded-sm border mt-5"></div>
 
-              <textarea
-                name=""
-                id=""
-                onChange={(e) => setDetails(e.target.value)}
-                value={ticketdetails}
-                placeholder="Notes"
-                className="w-[80%] min-h-[80px] max-h-[80px] mt-[20px] bg-white text-black text-sm rounded-sm border outline-none"
-              ></textarea>
+              <fieldset className="w-[80%] min-h-[100px] max-h-[100px] mt-3  border border-[#B4B4B8]  text-sm rounded-md text-gray-700">
+                <legend className="text-gray-700 ml-2">Notes</legend>
+
+                <textarea
+                  name=""
+                  id=""
+                  onChange={(e) => setDetails(e.target.value)}
+                  value={ticketdetails}
+                  className="w-full min-h-full max-h-full px-3 text-sm rounded-md outline-none"
+                ></textarea>
+              </fieldset>
 
               <div className=" flex flex-row items-center justify-around w-[80%] h-[40px] mt-[20px]  text-black text-sm rounded-sm ">
                 <Link href="/">
