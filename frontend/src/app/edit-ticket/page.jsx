@@ -7,15 +7,18 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Timer } from "@/components/Timer";
+import { CountUpTimer } from "@/components/CountUpTimer";
 
 export default function EditTicket() {
   const searchParams = useSearchParams();
   const [hours, setHours] = useState("");
   const [ticketdetails, setDetails] = useState("");
+  const [timerCount, setTimerCount] = useState(false);
 
   useEffect(() => {
-    const logDetails = searchParams.get("details") || "";
-    const logHours = searchParams.get("hours") || "";
+    const logDetails = searchParams.get("details");
+    const logHours = searchParams.get("hours");
 
     setHours(logHours);
     setDetails(logDetails);
@@ -46,6 +49,11 @@ export default function EditTicket() {
         toast.error("An error occurred.");
       }
     }
+  };
+
+  // rander countdown and countup timer baises on this button
+  const changeCoutTimer = () => {
+    setTimerCount((prev) => !prev);
   };
 
   return (
@@ -79,6 +87,8 @@ export default function EditTicket() {
               onSubmit={handleSubmit}
               className="flex flex-col w-full h-full items-center mt-2"
             >
+              {/* extra inputs */}
+
               <div className="w-[80%] p-1 h-[37px] flex items-center border border-[#B4B4B8] rounded-[4px]">
                 <input
                   type="number"
@@ -99,94 +109,39 @@ export default function EditTicket() {
 
               <div className="flex sm:flex-row flex-col w-[90%] mt-[20px] h-4 sm:items-center sm:justify-between items-center justify-between font-mono text-sm ">
                 <span>Track with Timer</span>
-                <span className="underline text-[#103BA3]">
-                  Use count down timer
+                <span
+                  onClick={changeCoutTimer}
+                  className="underline text-blue-500"
+                >
+                  {timerCount ? "Use count down timer" : "Use count up timer"}
                 </span>
               </div>
 
-              <div
-                name=""
-                id=""
-                className="flex flex-row justify-center items-center w-[80%] min-h-[80px] max-h-[80px] mt-[20px] px-3 text-sm rounded-md outline-none"
-              >
-                <div className="flex flex-row justify-center items-center w-[80%] min-h-[80px] max-h-[80px] mt-[20px] px-3 text-sm ">
-                  <div className="flex w-[50px] h-[60px] items-center justify-center">
-                    <select className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm">
-                      {Array.from({ length: 12 }, (_, i) => (
-                        <option key={i + 1} value={i + 1}>
-                          {i + 1}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <span className="text-lg text-slate-400">:</span>
-                  <div className="flex w-[50px] h-[60px] items-center justify-center">
-                    <select className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm">
-                      {Array.from({ length: 60 }, (_, i) => (
-                        <option key={i + 1} value={i + 1}>
-                          {i + 1}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <span className="text-lg text-slate-400">:</span>
-                  <div className="flex w-[50px] h-[60px] items-center justify-center">
-                    <select className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm">
-                      {Array.from({ length: 60 }, (_, i) => (
-                        <option key={i + 1} value={i + 1}>
-                          {i + 1}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-              </div>
+              {timerCount ? <CountUpTimer /> : <Timer />}
 
-              <div className=" flex flex-row items-center justify-evenly w-[80%] h-[40px] mt-[20px]  text-black text-sm rounded-sm ">
-                <button
-                  type="reset"
-                  className="underline text-lg text-gray-400 hover:text-gray-600"
-                >
-                  Reset
-                </button>
-                <button
-                  type="submit"
-                  className="text-lg text-white border text-center  border-green-500 hover:bg-green-700 bg-[#1E8826] rounded-sm w-[100px] h-full"
-                >
-                  Start
-                </button>
-                <button className="underline text-lg text-gray-400 hover:text-gray-600">
-                  Stop
-                </button>
-              </div>
-
-              <div className="w-[80%] bg-gray-200 h-[2px] text-sm rounded-sm border mt-5"></div>
-
-              <fieldset className="w-[80%] min-h-[100px] max-h-[100px] mt-3  border border-[#B4B4B8]  text-sm rounded-md text-gray-700">
+              {/* Existing Form Fields */}
+              <fieldset className="w-[80%] min-h-[100px] max-h-[100px] mt-3 border border-[#B4B4B8] text-sm rounded-md text-gray-700">
                 <legend className="text-gray-700 ml-2">Notes</legend>
-
                 <textarea
                   name=""
                   id=""
                   onChange={(e) => setDetails(e.target.value)}
                   value={ticketdetails}
-                  className="w-full min-h-full max-h-full px-3 text-sm rounded-md outline-none"
+                  className="resize-none w-full min-h-full max-h-full px-3 text-sm rounded-md outline-none"
                 ></textarea>
               </fieldset>
 
-              <div className=" flex flex-row items-center justify-around w-[80%] h-[40px] mt-[20px]  text-black text-sm rounded-sm ">
+              <div className="flex flex-row items-center justify-around w-[80%] h-[40px] mt-[20px] text-black text-sm rounded-sm">
                 <Link href="/">
                   <button className="text-lg border p-1 text-center hover:text-blue-700 hover:bg-blue-300 text-blue-500 border-blue-500 rounded-sm w-[130px] h-full">
-                    Cancel{" "}
+                    Cancel
                   </button>
                 </Link>
-
                 <button
                   type="submit"
                   className="text-lg text-black border text-center bg-blue-500 hover:bg-blue-300 hover:text-white rounded-sm w-[130px] h-full"
                 >
-                  {" "}
-                  Save{" "}
+                  Save
                 </button>
               </div>
             </form>

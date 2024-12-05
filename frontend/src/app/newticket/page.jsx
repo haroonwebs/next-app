@@ -4,12 +4,16 @@ import { useState } from "react";
 import { ExistingTickets } from "@/components/ExistingTickets";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export default function NewTicket() {
   const [tickettype, setType] = useState("");
   const [ticketsummary, setSummary] = useState("");
   const [ticketdetails, setDetails] = useState("");
   const [hours, setHours] = useState("");
+
+  // router hook for navigate to different pages
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,6 +43,10 @@ export default function NewTicket() {
         toast.error(error.response.data.message);
       }
     }
+  };
+
+  const handleCancel = () => {
+    router.push("/");
   };
 
   return (
@@ -100,7 +108,7 @@ export default function NewTicket() {
                   id=""
                   onChange={(e) => setDetails(e.target.value)}
                   value={ticketdetails}
-                  className="w-full min-h-full max-h-full text-sm rounded-md outline-none pl-1"
+                  className=" resize-none w-full min-h-full max-h-full text-sm rounded-md outline-none pl-1"
                 ></textarea>
               </fieldset>
 
@@ -128,7 +136,8 @@ export default function NewTicket() {
                 Save Ticket
               </button>
               <button
-                type="reset"
+                type="button"
+                onClick={handleCancel}
                 className="w-[80%] h-[40px] mt-[15px] border border-[#2EA8C3] text-[#2EA8C3] text-sm rounded-md hover:bg-blue-400 hover:text-white transition-all"
               >
                 Cancel

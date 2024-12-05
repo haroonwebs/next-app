@@ -58,11 +58,9 @@ export const ExistingTickets = () => {
                           </div>
                         </div>
                         {/* <span className="font-bold">{ticket.id}</span> */}
-                        <span className="ml-2 sm:text-[13px] text-[8px] font-semibold sm:font-medium ">
+                        <span className="ml-2 sm:text-[13px] text-[8px] text-[#000000] font-semibold sm:font-medium ">
                           {ticket.ticketdetails}
                         </span>
-
-                        {/* responsiveness complete there */}
                       </td>
                       <td className="sm:px-4 px-2 py-2 whitespace-nowrap overflow-visible">
                         {ticket.hours > 0 ? (
