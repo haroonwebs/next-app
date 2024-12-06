@@ -95,6 +95,7 @@ export default function NewTicket() {
                 <input
                   className="w-full h-full bg-transparent outline-none"
                   type="text"
+                  placeholder="Type here.."
                   value={ticketsummary}
                   onChange={(e) => setSummary(e.target.value)}
                 />
@@ -106,6 +107,7 @@ export default function NewTicket() {
                 <textarea
                   name=""
                   id=""
+                  placeholder="Type here.."
                   onChange={(e) => setDetails(e.target.value)}
                   value={ticketdetails}
                   className=" resize-none w-full min-h-full max-h-full text-sm rounded-md outline-none pl-1"
@@ -118,6 +120,7 @@ export default function NewTicket() {
                   <input
                     className="w-full h-full text-md bg-transparent outline-none border-r-2 mt-1"
                     type="number"
+                    placeholder="0.00"
                     value={hours}
                     onChange={(e) => setHours(e.target.value)}
                   />

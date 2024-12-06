@@ -1,35 +1,18 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Link from "next/link";
+import { useTickets } from "@/app/context/TicketContext";
 
 export const ExistingTickets = () => {
-  const [tickets, setTickets] = useState([]);
-
-  const getAllTickets = async () => {
-    try {
-      const res = await axios.get("http://localhost:4000/api/v1/alltickets");
-      console.log(res);
-      if (res.data && res.data.success) {
-        setTickets(res.data.data);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    getAllTickets();
-  }, []);
+  const { tickets } = useTickets();
 
   return (
-    <section className="sm:w-[55%] w-screen overflow-hidden sm:ml-[70px] sm:mr-8 ml-1 mr-1">
+    <section className="sm:w-[100%] lg:w-[55%] w-screen overflow-hidden lg:ml-[70px] lg:mr-8 ml-1 mr-1">
       <p className="sm:ml-[20px] sm:text-xl font-mono sm:mt-[50px] mt-5 sm:font-medium font-bold">
         Existing Tickets
       </p>
       <div className="flex flex-row sm:mt-[20px] mt-[10px] font-mono rounded-md">
         <div className="w-full bg-[#F8F8F8] overflow-hidden">
-          <div className="max-h-[300px] overflow-y-auto">
+          <div className="lg:max-h-[300px] max-h-[300px] overflow-y-auto">
             <table className="w-full">
               <thead>
                 <tr className="sm:border-b-2 border-b-4 ">
@@ -59,7 +42,7 @@ export const ExistingTickets = () => {
                         </div>
                         {/* <span className="font-bold">{ticket.id}</span> */}
                         <span className="ml-2 sm:text-[13px] text-[8px] text-[#000000] font-semibold sm:font-medium ">
-                          {ticket.ticketdetails}
+                          {ticket.tickettype}
                         </span>
                       </td>
                       <td className="sm:px-4 px-2 py-2 whitespace-nowrap overflow-visible">
@@ -77,7 +60,7 @@ export const ExistingTickets = () => {
                                 pathname: "/edit-ticket",
                                 query: {
                                   id: ticket.id,
-                                  details: ticket.ticketdetails,
+                                  tickettype: ticket.tickettype,
                                   hours: ticket.hours,
                                 },
                               }}

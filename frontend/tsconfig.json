@@ -30,7 +30,7 @@
     "src/components/ExistingTickets.jsx",
     "src/app/newticket/page.jsx",
     "src/components/Timer.jsx",
-    "src/app/page.tsx"
+    "src/app/page.jsx"
   ],
   "exclude": ["node_modules"]
 }

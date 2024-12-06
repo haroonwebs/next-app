@@ -37,7 +37,7 @@ export const Timer = () => {
       setIsRunning(true);
       setHasStarted(true);
     } else {
-      toast.warning("Set a valid timer duration first!");
+      toast.warning("Please set a valid time duration!");
     }
   };
 
@@ -59,7 +59,7 @@ export const Timer = () => {
         <div className="flex w-[50px] h-[60px] items-center justify-center">
           <select
             value={timerHours}
-            onChange={(e) => setTimerHours(Number(e.target.value))}
+            onChange={(e) => setTimerHours(e.target.value)}
             className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
             {Array.from({ length: 24 }, (_, i) => (
@@ -73,7 +73,7 @@ export const Timer = () => {
         <div className="flex w-[50px] h-[60px] items-center justify-center">
           <select
             value={timerMinutes}
-            onChange={(e) => setTimerMinutes(Number(e.target.value))}
+            onChange={(e) => setTimerMinutes(e.target.value)}
             className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
             {Array.from({ length: 60 }, (_, i) => (
@@ -87,7 +87,7 @@ export const Timer = () => {
         <div className="flex w-[50px] h-[60px] items-center justify-center">
           <select
             value={timerSeconds}
-            onChange={(e) => setTimerSeconds(Number(e.target.value))}
+            onChange={(e) => setTimerSeconds(e.target.value)}
             className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
             {Array.from({ length: 60 }, (_, i) => (
@@ -99,7 +99,7 @@ export const Timer = () => {
         </div>
       </div>
 
-      {/* Timer Buttons */}
+      {/* buttons for thimer control*/}
       <div className="flex flex-row items-center justify-evenly w-[80%] h-[40px] mt-[20px]">
         <button
           type="button"

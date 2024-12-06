@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 export const CountUpTimer = () => {
   const [timerHours, setTimerHours] = useState(0);
@@ -9,7 +9,7 @@ export const CountUpTimer = () => {
   const [isRunning, setIsRunning] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
-  // Timer logic
+  // countup timer logic
   useEffect(() => {
     let interval;
     if (isRunning) {
@@ -52,7 +52,7 @@ export const CountUpTimer = () => {
         <div className="flex w-[50px] h-[60px] items-center justify-center">
           <select
             value={timerHours}
-            onChange={(e) => setTimerHours(Number(e.target.value))}
+            onChange={(e) => setTimerHours(e.target.value)}
             className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
             {Array.from({ length: 24 }, (_, i) => (
@@ -66,7 +66,7 @@ export const CountUpTimer = () => {
         <div className="flex w-[50px] h-[60px] items-center justify-center">
           <select
             value={timerMinutes}
-            onChange={(e) => setTimerMinutes(Number(e.target.value))}
+            onChange={(e) => setTimerMinutes(e.target.value)}
             className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
             {Array.from({ length: 60 }, (_, i) => (
@@ -80,7 +80,7 @@ export const CountUpTimer = () => {
         <div className="flex w-[50px] h-[60px] items-center justify-center">
           <select
             value={timerSeconds}
-            onChange={(e) => setTimerSeconds(Number(e.target.value))}
+            onChange={(e) => setTimerSeconds(e.target.value)}
             className="w-full outline-none h-full text-[30px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
             {Array.from({ length: 60 }, (_, i) => (

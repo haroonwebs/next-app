@@ -13,11 +13,11 @@ import { CountUpTimer } from "@/components/CountUpTimer";
 export default function EditTicket() {
   const searchParams = useSearchParams();
   const [hours, setHours] = useState("");
-  const [ticketdetails, setDetails] = useState("");
+  const [tickettype, setDetails] = useState("");
   const [timerCount, setTimerCount] = useState(false);
 
   useEffect(() => {
-    const logDetails = searchParams.get("details");
+    const logDetails = searchParams.get("tickettype");
     const logHours = searchParams.get("hours");
 
     setHours(logHours);
@@ -34,7 +34,7 @@ export default function EditTicket() {
         `http://localhost:4000/api/v1/tickets/${id}`,
         {
           hours,
-          ticketdetails,
+          tickettype,
         }
       );
       toast.success(res.data.message);
@@ -60,10 +60,10 @@ export default function EditTicket() {
     <>
       <Header />
 
-      <main className="flex flex-col sm:flex-row w-screen h-full overflow-hidden">
+      <main className="flex flex-col lg:flex-row w-screen h-full overflow-hidden">
         <ExistingTickets />{" "}
         <section className="flex flex-row sm:mt-[50px] mt-8 sm:w-[45%] w-full border-[#7D7D82]">
-          <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[580px] bg-[#FFFFFF] sm:ml-[30px] ml-5 mb-5 shadow-lg mr-[20px] items-start font-mono rounded-lg">
+          <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[580px] bg-[#FFFFFF] mr-2 ml-2 sm:ml-36 md:ml-[200px] lg:ml-5 mb-5 shadow-lg lg:mr-[20px] items-start font-mono rounded-lg">
             <div className="flex flex-row w-full border min-h-[40px] bg-[#FFFFFF] items-center font-mono rounded-t-lg">
               <div className="h-full w-[150px] flex items-center">
                 <img
@@ -75,7 +75,7 @@ export default function EditTicket() {
                 <span className="text-sm text-black font-bold">{id}</span>
               </div>
               <div className="flex h-full w-full overflow-hidden text-nowrap p-[10px] text-[14px]">
-                {ticketdetails}
+                {tickettype}
               </div>
             </div>
 
@@ -126,7 +126,7 @@ export default function EditTicket() {
                   name=""
                   id=""
                   onChange={(e) => setDetails(e.target.value)}
-                  value={ticketdetails}
+                  value={tickettype}
                   className="resize-none w-full min-h-full max-h-full px-3 text-sm rounded-md outline-none"
                 ></textarea>
               </fieldset>
