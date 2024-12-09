@@ -14,7 +14,7 @@ export const Timer = () => {
     let interval;
     if (isRunning) {
       interval = setInterval(() => {
-        if (timerSeconds > 0) {
+        if (timerSeconds > 1) {
           setTimerSeconds((prev) => prev - 1);
         } else if (timerMinutes > 0) {
           setTimerMinutes((prev) => prev - 1);

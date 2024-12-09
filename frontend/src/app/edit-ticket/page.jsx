@@ -9,12 +9,15 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Timer } from "@/components/Timer";
 import { CountUpTimer } from "@/components/CountUpTimer";
+// import { useTickets } from "../context/TicketContext";
 
 export default function EditTicket() {
   const searchParams = useSearchParams();
   const [hours, setHours] = useState("");
   const [tickettype, setDetails] = useState("");
   const [timerCount, setTimerCount] = useState(false);
+
+  // const { updatetickets } = useTickets();
 
   useEffect(() => {
     const logDetails = searchParams.get("tickettype");
@@ -37,6 +40,12 @@ export default function EditTicket() {
           tickettype,
         }
       );
+      // console.log(res);
+      // const updateticket = res.data.data;
+      // console.log(updateticket);
+
+      // updatetickets(updateticket);
+
       toast.success(res.data.message);
     } catch (error) {
       if (
@@ -63,7 +72,7 @@ export default function EditTicket() {
       <main className="flex flex-col lg:flex-row w-screen h-full overflow-hidden">
         <ExistingTickets />{" "}
         <section className="flex flex-row sm:mt-[50px] mt-8 sm:w-[45%] w-full border-[#7D7D82]">
-          <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[580px] bg-[#FFFFFF] mr-2 ml-2 sm:ml-36 md:ml-[200px] lg:ml-5 mb-5 shadow-lg lg:mr-[20px] items-start font-mono rounded-lg">
+          <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[580px] bg-[#FFFFFF] mr-2 ml-2  lg:ml-5 mb-5 shadow-lg lg:mr-[20px] items-start font-mono rounded-lg">
             <div className="flex flex-row w-full border min-h-[40px] bg-[#FFFFFF] items-center font-mono rounded-t-lg">
               <div className="h-full w-[150px] flex items-center">
                 <img

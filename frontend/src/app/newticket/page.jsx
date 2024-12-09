@@ -5,12 +5,15 @@ import { ExistingTickets } from "@/components/ExistingTickets";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
+import { useTickets } from "../context/TicketContext";
 
 export default function NewTicket() {
   const [tickettype, setType] = useState("");
   const [ticketsummary, setSummary] = useState("");
   const [ticketdetails, setDetails] = useState("");
   const [hours, setHours] = useState("");
+
+  const { updateTickets } = useTickets();
 
   // router hook for navigate to different pages
   const router = useRouter();
@@ -33,6 +36,12 @@ export default function NewTicket() {
       setDetails("");
       setHours("");
 
+      console.log(res);
+
+      const newTicket = res.data.data;
+      console.log(newTicket);
+      updateTickets(newTicket);
+
       toast.success(res.data.message);
     } catch (error) {
       if (
@@ -53,13 +62,13 @@ export default function NewTicket() {
     <>
       <Header />
 
-      <main className="flex flex-col sm:flex-row w-screen h-full overflow-hidden">
+      <main className="flex flex-col lg:flex-row w-screen h-full overflow-hidden">
         <ExistingTickets />
 
-        <section className="flex flex-row sm:mt-[70px] mt-8 sm:w-[45%] w-auto">
-          <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[550px] bg-[#FFFFFF] sm:ml-[30px] mb-5 sm:mb-2 ml-5 shadow-lg mr-[20px] items-center font-mono rounded-lg">
+        <section className="flex flex-row sm:mt-[50px] mt-8 sm:w-[45%] w-full border-[#7D7D82]">
+          <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[550px] bg-[#FFFFFF]  mb-5 sm:mb-2 ml-5 shadow-lg mr-[20px] items-center font-mono rounded-lg">
             <h2
-              className="mt-[30px] font-mono text-black font-medium text-lg sm:mr-[136px] mr-20
+              className="mt-[30px] font-mono text-black font-medium text-lg  lg:mr-[136px] mr-20
             "
             >
               Create New Ticket
