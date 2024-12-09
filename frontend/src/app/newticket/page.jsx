@@ -65,21 +65,23 @@ export default function NewTicket() {
       <main className="flex flex-col lg:flex-row w-screen h-full overflow-hidden">
         <ExistingTickets />
 
-        <section className="flex flex-row sm:mt-[50px] mt-8 sm:w-[45%] w-full border-[#7D7D82]">
+        <section className="flex flex-row sm:mt-[50px] mt-8 mb-5 sm:w-[45%] w-full border-[#7D7D82]">
           <div className="flex flex-col w-[400px] border border-[#7D7D82] h-[550px] bg-[#FFFFFF]  mb-5 sm:mb-2 ml-5 shadow-lg mr-[20px] items-center font-mono rounded-lg">
             <h2
-              className="mt-[30px] font-mono text-black font-medium text-lg  lg:mr-[136px] mr-20
+              className="mt-[39px] font-mono text-[#000000] font-[500px] text-[20px] lg:mr-[120px] mr-20
             "
             >
-              Create New Ticket
+              Create new ticket
             </h2>
 
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col w-full items-center mt-[20px]"
+              className="flex flex-col w-full items-center mt-[10px] "
             >
-              <fieldset className="w-[80%] h-[50px] border border-[#B4B4B8] px-3 text-sm rounded-md text-gray-700">
-                <legend className="text-gray-700">Ticket Type</legend>
+              <fieldset className="w-[80%] h-[55px] border border-[#B4B4B8] px-3 text-sm rounded-[4px] text-gray-700">
+                <legend className="text-[15px] font-[400px] text-[#424247]">
+                  Ticket type
+                </legend>
                 <div className="flex justify-center gap-1 h-full">
                   <img
                     src="/images/Group 3.png"
@@ -87,10 +89,14 @@ export default function NewTicket() {
                     className="w-6 h-6"
                   />
                   <select
-                    className="w-full h-full text-md font-bold bg-transparent outline-none rounded-md mt-1"
+                    className="w-full h-full text-[15px] font-[500px] bg-transparent outline-none mt-1"
                     value={tickettype}
+                    placeholder="Select type.."
                     onChange={(e) => setType(e.target.value)}
                   >
+                    <option value="" disabled>
+                      Select type..
+                    </option>
                     <option value="Story">Story</option>
                     <option value="bug">Bug</option>
                     <option value="feature">Feature Request</option>
@@ -99,8 +105,10 @@ export default function NewTicket() {
                 </div>
               </fieldset>
 
-              <fieldset className="w-[80%] h-[50px] border border-[#B4B4B8] mt-3  px-3 text-sm rounded-md text-gray-700">
-                <legend className="text-gray-700">Summary</legend>
+              <fieldset className="w-[80%] h-[55px] border border-[#B4B4B8] mt-2  px-3 text-sm rounded-[4px] text-gray-700">
+                <legend className="text-[15px] font-[400px] text-[#424247]">
+                  Summary
+                </legend>
                 <input
                   className="w-full h-full bg-transparent outline-none"
                   type="text"
@@ -110,8 +118,10 @@ export default function NewTicket() {
                 />
               </fieldset>
 
-              <fieldset className="w-[80%] min-h-[140px] max-h-[140px] mt-3  border border-[#B4B4B8] text-sm rounded-md text-gray-700">
-                <legend className="text-gray-700 ml-[10px]">Details</legend>
+              <fieldset className="w-[80%] min-h-[140px] max-h-[140px] mt-2 px-3  border border-[#B4B4B8] text-sm rounded-[4px] text-gray-700">
+                <legend className="text-[15px] font-[400px] text-[#424247]">
+                  Details
+                </legend>
 
                 <textarea
                   name=""
@@ -119,15 +129,17 @@ export default function NewTicket() {
                   placeholder="Type here.."
                   onChange={(e) => setDetails(e.target.value)}
                   value={ticketdetails}
-                  className=" resize-none w-full min-h-full max-h-full text-sm rounded-md outline-none pl-1"
+                  className="resize-none w-full min-h-full max-h-full text-sm rounded-md outline-none pl-1"
                 ></textarea>
               </fieldset>
 
-              <fieldset className="w-[80%] h-[50px] border border-[#B4B4B8] px-3 text-sm rounded-md text-gray-700">
-                <legend className="text-gray-700">Hours</legend>
+              <fieldset className="w-[80%] h-[50px] border border-[#B4B4B8] mt-2 px-3 text-sm rounded-[4px] text-gray-700">
+                <legend className="text-[15px] font-[400px] text-[#424247]">
+                  Hours
+                </legend>
                 <div className="flex justify-center gap-1 h-full">
                   <input
-                    className="w-full h-full text-md bg-transparent outline-none border-r-2 mt-1"
+                    className="w-full h-full text-[15px] font-[400px] placeholder-[#000000] bg-transparent outline-none border-r-2 mt-1"
                     type="number"
                     placeholder="0.00"
                     value={hours}
@@ -143,14 +155,14 @@ export default function NewTicket() {
 
               <button
                 type="submit"
-                className="w-[80%] h-[40px] mt-[30px] bg-[#2EA8C3] text-black text-sm rounded-md hover:text-white transition-all"
+                className="w-[80%] h-[40px] mt-[30px] bg-[#2EA8C3] text-[#000000] font-[400px] text-[18px] rounded-[4px] hover:text-white transition-all"
               >
                 Save Ticket
               </button>
               <button
                 type="button"
                 onClick={handleCancel}
-                className="w-[80%] h-[40px] mt-[15px] border border-[#2EA8C3] text-[#2EA8C3] text-sm rounded-md hover:bg-blue-400 hover:text-white transition-all"
+                className="w-[80%] h-[40px] mt-[12px] border-2 border-[#2EA8C3] text-[#2EA8C3] font-[400px] text-[18px] rounded-[4px] hover:bg-blue-400 hover:text-white transition-all"
               >
                 Cancel
               </button>
