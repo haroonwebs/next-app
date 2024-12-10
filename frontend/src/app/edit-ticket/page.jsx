@@ -87,7 +87,7 @@ export default function EditTicket() {
                   {id}
                 </span>
               </div>
-              <div className="flex h-full w-full overflow-hidden text-nowrap p-[8px] font-[400px] text-[15px]">
+              <div className="flex h-full w-full overflow-hidden text-nowrap ml-1 p-[8px] font-[400px] text-[15px]">
                 {tickettype}
               </div>
             </div>
@@ -132,7 +132,11 @@ export default function EditTicket() {
                 </span>
               </div>
 
-              {timerCount ? <CountUpTimer /> : <Timer />}
+              {timerCount ? (
+                <CountUpTimer hours={hours} />
+              ) : (
+                <Timer hours={hours} />
+              )}
 
               {/* Existing Form Fields */}
               <fieldset className="w-[80%] min-h-[100px] max-h-[100px] mt-3 border border-[#B4B4B8] text-sm rounded-md">

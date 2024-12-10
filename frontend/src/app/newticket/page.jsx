@@ -11,7 +11,7 @@ export default function NewTicket() {
   const [tickettype, setType] = useState("");
   const [ticketsummary, setSummary] = useState("");
   const [ticketdetails, setDetails] = useState("");
-  const [hours, setHours] = useState("");
+  const [hours, setHours] = useState(0);
 
   const { updateTickets } = useTickets();
 
@@ -129,7 +129,7 @@ export default function NewTicket() {
                   placeholder="Type here.."
                   onChange={(e) => setDetails(e.target.value)}
                   value={ticketdetails}
-                  className="resize-none w-full min-h-full max-h-full text-sm rounded-md outline-none pl-1"
+                  className="resize-none w-full min-h-[100px] max-h-full text-sm rounded-md outline-none pl-1"
                 ></textarea>
               </fieldset>
 

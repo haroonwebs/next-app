@@ -32,19 +32,30 @@ export const ExistingTickets = () => {
                       key={ticket.id}
                       className="border-b-2 w-full hover:bg-slate-200"
                     >
-                      <td className="border-r-2 sm:px-4 py-2  flex items-center overflow-visible">
-                        <div className="h-full sm:w-[100px] flex items-center">
-                          <img src="/images/Group 3.png" alt="ticket logo" />
+                      <Link
+                        href={{
+                          pathname: "/edit-ticket",
+                          query: {
+                            id: ticket.id,
+                            tickettype: ticket.tickettype,
+                            hours: ticket.hours,
+                          },
+                        }}
+                      >
+                        <td className="border-r-2 sm:px-4 py-2  flex items-center overflow-visible">
+                          <div className="h-full sm:w-[100px] flex items-center">
+                            <img src="/images/Group 3.png" alt="ticket logo" />
 
-                          <div className="sm:text-sm text-[8px] text-[#000000] sm:font-[500px] font-bold sm:ml-2 ml-1">
-                            Tech-<span>{ticket.id}</span>
+                            <div className="sm:text-sm text-[8px] text-[#000000] sm:font-[500px] font-bold sm:ml-2 ml-1">
+                              Tech-<span>{ticket.id}</span>
+                            </div>
                           </div>
-                        </div>
-                        {/* <span className="font-bold">{ticket.id}</span> */}
-                        <span className="ml-2 sm:text-[13px] text-[8px] text-[#000000] font-semibold sm:font-medium ">
-                          {ticket.tickettype}
-                        </span>
-                      </td>
+                          {/* <span className="font-bold">{ticket.id}</span> */}
+                          <span className="ml-2 sm:text-[13px] text-[8px] text-[#000000] font-semibold sm:font-medium ">
+                            {ticket.tickettype}
+                          </span>
+                        </td>
+                      </Link>
                       <td className="sm:px-4 px-2 py-2 whitespace-nowrap overflow-visible">
                         {ticket.hours > 0 ? (
                           <span className="sm:text-[13px] text-[#000000] text-[10px] sm:font-[400px]">

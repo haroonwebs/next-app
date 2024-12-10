@@ -3,13 +3,12 @@ import { useState, useEffect } from "react";
 // import { toast } from "react-toastify";
 
 export const CountUpTimer = () => {
-  const [timerHours, setTimerHours] = useState("");
-  const [timerMinutes, setTimerMinutes] = useState("");
-  const [timerSeconds, setTimerSeconds] = useState("");
+  const [timerHours, setTimerHours] = useState(0);
+  const [timerMinutes, setTimerMinutes] = useState(0);
+  const [timerSeconds, setTimerSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
 
-  // countup timer logic
   useEffect(() => {
     let interval;
     if (isRunning) {
@@ -24,6 +23,11 @@ export const CountUpTimer = () => {
           setTimerMinutes(0);
           setTimerHours((prev) => prev + 1);
         }
+
+        // if (timerHours >= 0 && timerMinutes === 0 && timerSeconds === 0) {
+        //   setIsRunning(false);
+        //   clearInterval(interval);
+        // }
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -55,7 +59,7 @@ export const CountUpTimer = () => {
             onChange={(e) => setTimerHours(e.target.value)}
             className="w-full outline-none h-full text-[44px] text-[#000000] font-[400px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
-            <option value="" disabled hidden>
+            <option value={0} disabled hidden>
               00
             </option>
             {Array.from({ length: 24 }, (_, i) => (
@@ -72,7 +76,7 @@ export const CountUpTimer = () => {
             onChange={(e) => setTimerMinutes(e.target.value)}
             className="w-full outline-none h-full text-[44px] text-[#000000] font-[400px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
-            <option value="" disabled hidden>
+            <option value={0} disabled hidden>
               00
             </option>
             {Array.from({ length: 60 }, (_, i) => (
@@ -89,7 +93,7 @@ export const CountUpTimer = () => {
             onChange={(e) => setTimerSeconds(e.target.value)}
             className="w-full outline-none h-full text-[44px] text-[#000000] font-[400px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
-            <option value="" disabled hidden>
+            <option value={0} disabled hidden>
               00
             </option>
             {Array.from({ length: 60 }, (_, i) => (
@@ -113,7 +117,7 @@ export const CountUpTimer = () => {
         <button
           type="button"
           onClick={startTimer}
-          className="text-[18px]font-[400px] text-[#FFFFFF] border text-center border-green-500 hover:bg-green-700 bg-[#1E8826] rounded-sm w-[100px] h-full"
+          className="text-[18px]font-[400px] text-[#FFFFFF] border text-center border-green-500 hover:bg-green-700 bg-[#1E8826] rounded-sm w-[120px] lg:w-[164px] h-full"
         >
           {hasStarted && !isRunning ? "Resume" : "Start"}
         </button>

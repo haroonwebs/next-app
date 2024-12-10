@@ -2,19 +2,34 @@
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
-export const Timer = () => {
-  const [timerHours, setTimerHours] = useState("");
-  const [timerMinutes, setTimerMinutes] = useState("");
-  const [timerSeconds, setTimerSeconds] = useState("");
+export const Timer = ({ hours }) => {
+  // convet hours into hh:mm:ss form
+
+  const convertHours = (hours) => {
+    const convertedHours = Math.floor(hours);
+    const minutes = Math.floor((hours - convertedHours) * 60);
+    return { convertedHours, minutes };
+  };
+
+  const [timerHours, setTimerHours] = useState(0);
+  const [timerMinutes, setTimerMinutes] = useState(0);
+  const [timerSeconds, setTimerSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    const { convertedHours, minutes } = convertHours(hours);
+    setTimerHours(convertedHours);
+    setTimerMinutes(minutes); // Fixed this line
+    setTimerSeconds(0);
+  }, [hours]);
 
   // Timer logic
   useEffect(() => {
     let interval;
     if (isRunning) {
       interval = setInterval(() => {
-        if (timerSeconds > 1) {
+        if (timerSeconds > 0) {
           setTimerSeconds((prev) => prev - 1);
         } else if (timerMinutes > 0) {
           setTimerMinutes((prev) => prev - 1);
@@ -31,6 +46,8 @@ export const Timer = () => {
     }
     return () => clearInterval(interval);
   }, [isRunning, timerHours, timerMinutes, timerSeconds]);
+
+  // convet hours into hh:mm:ss form
 
   const startTimer = () => {
     if (timerHours || timerMinutes || timerSeconds) {
@@ -62,7 +79,7 @@ export const Timer = () => {
             onChange={(e) => setTimerHours(e.target.value)}
             className="w-full outline-none h-full text-[44px] text-[#000000] font-[400px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
-            <option value="" disabled hidden>
+            <option value={0} disabled hidden>
               00
             </option>
             {Array.from({ length: 24 }, (_, i) => (
@@ -79,7 +96,7 @@ export const Timer = () => {
             onChange={(e) => setTimerMinutes(e.target.value)}
             className="w-full outline-none h-full text-[44px] text-[#000000] font-[400px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
-            <option value="" disabled hidden>
+            <option value={0} disabled hidden>
               00
             </option>
             {Array.from({ length: 60 }, (_, i) => (
@@ -96,7 +113,7 @@ export const Timer = () => {
             onChange={(e) => setTimerSeconds(e.target.value)}
             className="w-full outline-none h-full text-[44px] text-[#000000] font-[400px] appearance-none text-center bg-transparent border border-gray-300 rounded-sm"
           >
-            <option value="" disabled hidden>
+            <option value={0} disabled hidden>
               00
             </option>
             {Array.from({ length: 60 }, (_, i) => (

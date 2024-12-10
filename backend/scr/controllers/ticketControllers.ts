@@ -17,7 +17,7 @@ export const createTicket = async (
     };
     console.log(ticketdetails, ticketsummary, tickettype, hours);
 
-    if (!tickettype || !ticketsummary || !ticketdetails || !hours) {
+    if (!tickettype || !ticketsummary || !ticketdetails) {
       res.status(403).json({
         success: false,
         message: "Please fill complete form with valid data",
