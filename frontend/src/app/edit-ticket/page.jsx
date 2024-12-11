@@ -3,13 +3,13 @@ import { Header } from "@/components/Header";
 import { ExistingTickets } from "@/components/ExistingTickets";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Timer } from "@/components/Timer";
 import { CountUpTimer } from "@/components/CountUpTimer";
-// import { useTickets } from "../context/TicketContext";
+import { useTickets } from "../context/TicketContext";
 
 export default function EditTicket() {
   const searchParams = useSearchParams();
@@ -17,7 +17,8 @@ export default function EditTicket() {
   const [tickettype, setDetails] = useState("");
   const [timerCount, setTimerCount] = useState(false);
 
-  // const { updatetickets } = useTickets();
+  const { editTicket } = useTickets();
+  const hoursRef = useRef(0);
 
   useEffect(() => {
     const logDetails = searchParams.get("tickettype");
@@ -40,11 +41,14 @@ export default function EditTicket() {
           tickettype,
         }
       );
-      // console.log(res);
-      // const updateticket = res.data.data;
-      // console.log(updateticket);
+      console.log(res);
+      const updateTicket = {
+        id,
+        tickettype,
+        hours,
+      };
 
-      // updatetickets(updateticket);
+      editTicket(updateTicket);
 
       toast.success(res.data.message);
     } catch (error) {
@@ -63,6 +67,22 @@ export default function EditTicket() {
   // rander countdown and countup timer baises on this button
   const changeCoutTimer = () => {
     setTimerCount((prev) => !prev);
+  };
+
+  const handleHoursRef = () => {
+    if (hoursRef.current) {
+      hoursRef.current.focus();
+    }
+  };
+
+  const handleIncrementRef = () => {
+    setHours((prev) => Math.max(prev + 1, 0));
+    hoursRef.current.focus();
+  };
+
+  const handleDecrementRef = () => {
+    setHours((prev) => Math.max(prev - 1, 0));
+    hoursRef.current.focus();
   };
 
   return (
@@ -104,6 +124,7 @@ export default function EditTicket() {
 
               <div className="w-[80%] p-1 h-[37px] flex items-center border border-[#B4B4B8] rounded-[4px]">
                 <input
+                  ref={hoursRef}
                   type="number"
                   name=""
                   value={hours}
@@ -111,12 +132,28 @@ export default function EditTicket() {
                   min="0.00"
                   id=""
                   placeholder="0.00"
-                  className="w-full h-full bg-[#FFFFFF] placeholder-[#000000] text-[#000000] px-1 border-r-2 font-[400px] text-[15px] outline-none"
+                  className=" appearance-none w-full h-full bg-[#FFFFFF] placeholder-[#000000] text-[#000000] px-1 border-r-2 font-[400px] text-[15px] outline-none"
                 />
+                <div className="h-full w-6 flex-col justify-start items-center border-r-2">
+                  {" "}
+                  <img
+                    onClick={handleIncrementRef}
+                    src="/images/Polygon 1 (1).png"
+                    alt="not found"
+                    className="mt-2 ml-1"
+                  />
+                  <img
+                    onClick={handleDecrementRef}
+                    src="/images/Polygon 2.png"
+                    alt="not found"
+                    className="ml-1"
+                  />
+                </div>
                 <img
+                  onClick={handleHoursRef}
                   src="/images/image 2.png"
                   alt=""
-                  className="w-6 h-4 p-[2px]"
+                  className="w-6 h-4 p-[2px] cursor-pointer hover:w-5 hover:h-3"
                 />
               </div>
 
@@ -162,7 +199,7 @@ export default function EditTicket() {
                   type="submit"
                   className="text-[18px] font-[400px] text-[#000000] border text-center bg-blue-500 hover:bg-blue-300 hover:text-white rounded-sm w-[150px] h-full"
                 >
-                  Save
+                  <a href="/">Save</a>
                 </button>
               </div>
             </form>

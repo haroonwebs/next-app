@@ -32,6 +32,7 @@ export const ExistingTickets = () => {
                       key={ticket.id}
                       className="border-b-2 w-full hover:bg-slate-200"
                     >
+                      {" "}
                       <Link
                         href={{
                           pathname: "/edit-ticket",
@@ -51,9 +52,11 @@ export const ExistingTickets = () => {
                             </div>
                           </div>
                           {/* <span className="font-bold">{ticket.id}</span> */}
-                          <span className="ml-2 sm:text-[13px] text-[8px] text-[#000000] font-semibold sm:font-medium ">
-                            {ticket.tickettype}
-                          </span>
+                          <div>
+                            <span className="ml-2 sm:text-[13px] text-[8px] text-[#000000] font-semibold sm:font-medium ">
+                              {ticket.tickettype}
+                            </span>
+                          </div>
                         </td>
                       </Link>
                       <td className="sm:px-4 px-2 py-2 whitespace-nowrap overflow-visible">
